@@ -194,10 +194,6 @@ class index_pq:
     def __repr__(self):
         return f"<{self.__class__.__name__} with {len(self)} elements>"
 
-
-    def __repr__(self):
-        return f"<{self.__class__.__name__} with {len(self)} elements>"
-
 class maxindex_pq:
     def __init__(self, lst=None):
         self._reset()
