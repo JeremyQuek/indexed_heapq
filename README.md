@@ -77,7 +77,7 @@ For **Arbitrary Removal** at index $k$:
 * Perform `list.pop()`.
 * Apply **fixheap** at index $k$ to re-equilibrate the structure.
 
-To finalize the implementation, I integrated **Index-Tracking** ($\text{Pos} \leftrightarrow \text{ID}$). By augmenting the `stdlib heapq` source logic, I`Fixheap()` preserves the heap invariant by re-sifting nodes following any value mutation. Since the tree height is strictly bounded by $H = \lfloor \log_2 n \rfloor$, the operation remains a highly efficient $O(\log n)$.
+To finalize the implementation, I integrated **Index-Tracking** ($\text{Pos} \leftrightarrow \text{ID}$). By augmenting the `stdlib heapq` source logic, `Fixheap()` preserves the heap invariant by re-sifting nodes following any value mutation. Since the tree height is strictly bounded by $H = \lfloor \log_2 n \rfloor$, the operation remains a highly efficient $O(\log n)$.
 
 <br/>
 
@@ -300,7 +300,7 @@ Depending on graph density, this has varying impact.
 
 ### Verdict
 
-Overall, in terms of raw speed `heapq` is superior. Did `index_heap()` perform as ill as I hope? Not particularly. <br>
+Overall, in terms of raw speed `heapq` is superior. Did `index_heap()` perform as well as I hope? Not particularly. <br>
 But in the very least, implementing it djikstra did feel idiomatic and clean, which probably signals that its API design is passable (kudos me). 
 
 However, benchmarking `fix_heap()` alone (no class wrapper) against lazy deletion, shows that they are nearly identical in speed.
