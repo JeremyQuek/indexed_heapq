@@ -27,8 +27,7 @@ It's annoying that these problems often require a dynamic updates to arbitrary h
 </br>
 </br>
 
-### The Fixheap Function
-<hr>
+## The Main Idea: `fixheap()`
 <p align="center">
   <img width="800" height="450" alt="image" src="https://github.com/user-attachments/assets/ac16dea7-00b6-4453-95a2-fdde5d492081" />
 </p>
