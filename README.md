@@ -83,7 +83,7 @@ To finalize the implementation, I integrated **Index-Tracking** ($\text{Pos} \le
 
 ## Indexed Priority Queue Implementation 
 
-After working through the theory and rigorously testing the heap functions, it was time to implement them. I made sure to reference and emulate the `heappq` code as much as possible, to ensure correctness and reliabilt.
+After working through the theory and rigorously testing the heap functions, it was time to implement them. I made sure to reference and emulate the `heappq` code as much as possible, to ensure correctness and reliabilty.
 
 **Create Object**
 ```python3
