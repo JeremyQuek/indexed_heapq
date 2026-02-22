@@ -35,14 +35,17 @@ It's annoying that these problems often require a dynamic updates to arbitrary h
 
 
 
-The pedagogical `fixheap()` function is used on theoretical implementations of heaps as an efficient way to arbitrary update heap nodes while maintaining its invariant. For instance, pseudo code of Djikstra's often include an efficient decrease function on heap node. This is usually implemented using either `siftup` or `siftdown` logic
+The pedagogical `fixheap()` function is used on theoretical implementations of heaps as an efficient way to arbitrary update heap nodes while maintaining its invariant. For instance, pseudo code of Djikstra's often include an efficient decrease function on heap node. <br>
+This is usually implemented using either `siftup` or `siftdown` logic
 
 ### Python's heapq
-Reading through the heappq reading, I quickly found that the internal heapq function also employs `siftup()` or `siftdown()` functions. However, they are reserved for root/bottom nodes. It makes sense as using `siftup()`/`siftdown()` requires knowing the exact index of an arbitray node, which is not a property of binary heaps.
+Reading through the heappq reading, I quickly found that the internal heapq function also employs `siftup()` or `siftdown()` functions. However, they are reserved for root/bottom nodes.
+This makes sense as  `siftup()`/`siftdown()` requires knowing the index of an arbitray node, which is not a property of binary heaps.
 
 <br/>
 
-**Thus the question is:** Suppose we could track the index of all heap node, can we update any nodes value correctly and efficiently using `siftup()`/`siftdown()`?
+**Thus the question is:** <br>
+Suppose we could track the index of all heap node, can we update any nodes value correctly and efficiently using `siftup()`/`siftdown()`?
 <br/>
 <br/>
 
@@ -280,27 +283,31 @@ Stress test simply applies thousands of `fix_heap()` operations and compares the
 <img width="800" height="584" alt="Screenshot 2026-02-21 at 5 45 59 PM" src="https://github.com/user-attachments/assets/45bf4c1b-2a50-4abc-8c46-e618c1e1f3f5" />
 
 
-As expected, the stdlib heappq is roughly 4 times faster than the indexed_pq implementation. This makes sense since the indexed pq needs to track additional operations for its key using a slow hashmap. Moreover, stdlib heapq is implemented in C, which makes each instruction much more optimized.
+As expected, the stdlib heappq is roughly 4 times faster than the indexed_pq implementation. <br>
+This makes sense since the indexed pq needs to track additional operations for its key using a slow hashmap.<br>
+Moreover, stdlib heapq is implemented in C, which makes each instruction much more optimized.
 
 <br/>
 
 ### Djikstra Test
 <img width="800" height="591" alt="Screenshot 2026-02-21 at 5 44 22 PM" src="https://github.com/user-attachments/assets/b29f0085-344d-4845-b924-ad66958ef3ee" />
 
-The results are more favourable, and this likely because `index_heap()` constraints the heap size to number of vertices V.
-Wherein `heapq` lazy deletion, outdate nodes are not cleaned which makes the heap scale with edges E. 
-
-Depending on graph, this has varying impact.
+The results are more favourable, and this likely because `index_heap()` constraints the heap size to number of vertices V.<br>
+Wherein `heapq` lazy deletion, outdate nodes are not cleaned which makes the heap scale with edges E. <br>
+Depending on graph density, this has varying impact.
 
 <br/>
 
 ### Verdict
 
-Overall, in terms of raw speed `heapq` is superior. Did `index_heap()` perform as ill as I hope? Not particularly. But in the very least, implementing it djikstra did feel idiomatic and clean, which probably signals that its API design is passable (kudos me) and helps to reduce bookkeeping. 
+Overall, in terms of raw speed `heapq` is superior. Did `index_heap()` perform as ill as I hope? Not particularly. <br>
+But in the very least, implementing it djikstra did feel idiomatic and clean, which probably signals that its API design is passable (kudos me). 
 
-Whats interesting is that, benchmarking the raw `fix_heap()` function against lazy deletion, revealed that the two operations are nearly identical in raw speed.
+However, benchmarking `fix_heap()` alone (no class wrapper) against lazy deletion, shows that they are nearly identical in speed.
+<img width="800" height="583" alt="Screenshot 2026-02-21 at 9 18 02 PM" src="https://github.com/user-attachments/assets/4857d524-46f9-4ec1-9e76-2a88c2649033" />
 
-The means that the latency in `index_heap()` likely arosed from extra indirection of Python's OOP layer, and the overhead of hashmap operations for keys.
+The suggests that the latency in `index_heap()` comes from Python's OOP layer & hashmap operations.<br>
+With better optimization like CPython support, indexed pqs could perform better
 
 
 
