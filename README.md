@@ -38,6 +38,7 @@ The pedagogical `fixheap()` function is used on theoretical implementations of h
 This is usually implemented using either `siftup` or `siftdown` logic
 
 ### Python's heapq
+[(link to cpython/lib/heapq.py)](https://github.com/python/cpython/blob/main/Lib/heapq.py)<br>
 Reading through the heappq reading, I quickly found that the internal heapq function also employs `siftup()` or `siftdown()` functions. However, they are reserved for root/bottom nodes.
 This makes sense as  `siftup()`/`siftdown()` requires knowing the index of an arbitray node, which is not a property of binary heaps.
 
