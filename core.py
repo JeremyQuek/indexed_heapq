@@ -322,7 +322,7 @@ class maxindex_pq:
 
         # Bubble bottom down
         if delete_idx!=len(self._heap):
-            self._heapfix(bottom_key, bottom_value)
+            self._heapfix_max(bottom_key, bottom_value)
         return old_value
 
 
