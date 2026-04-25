@@ -323,22 +323,6 @@ class index_pq_max:
         return old_value
 
     def _indexed_siftdown_max(self, startpos, pos):
-
-        # def _siftdown_max(heap, startpos, pos):
-        #     'Maxheap variant of _siftdown'
-        #     newitem = heap[pos]
-        #     # Follow the path to the root, moving parents down until finding a place
-        #     # newitem fits.
-        #     while pos > startpos:
-        #         parentpos = (pos - 1) >> 1
-        #         parent = heap[parentpos]
-        #         if parent < newitem:
-        #             heap[pos] = parent
-        #             pos = parentpos
-        #             continue
-        #         break
-        #     heap[pos] = newitem
-
         newitem = self._heap[pos]
         while pos > startpos:
             parentpos = (pos - 1) >> 1
@@ -353,28 +337,6 @@ class index_pq_max:
         self._index[newitem[1]] = pos
 
     def _indexed_siftup_max(self, pos):
-
-        # def _siftup_max(heap, pos):
-        #     'Maxheap variant of _siftup'
-        #     endpos = len(heap)
-        #     startpos = pos
-        #     newitem = heap[pos]
-        #     # Bubble up the larger child until hitting a leaf.
-        #     childpos = 2*pos + 1    # leftmost child position
-        #     while childpos < endpos:
-        #         # Set childpos to index of larger child.
-        #         rightpos = childpos + 1
-        #         if rightpos < endpos and not heap[rightpos] < heap[childpos]:
-        #             childpos = rightpos
-        #         # Move the larger child up.
-        #         heap[pos] = heap[childpos]
-        #         pos = childpos
-        #         childpos = 2*pos + 1
-        #     # The leaf at pos is empty now.  Put newitem there, and bubble it up
-        #     # to its final resting place (by sifting its parents down).
-        #     heap[pos] = newitem
-        #     _siftdown_max(heap, startpos, pos)
-
         endpos = len(self._heap)
         startpos = pos
         newitem = self._heap[pos]
