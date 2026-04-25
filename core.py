@@ -463,7 +463,7 @@ if __name__ == "__main__":
     print("")
 
     # 2. MAX-HEAP VALIDATION
-    max_heap = maxindex_pq()
+    max_heap = index_pq_max()
     max_truth_table = {}
 
     # Initial Pushes
