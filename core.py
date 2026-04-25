@@ -126,18 +126,17 @@ class index_pq:
     def _heapremove(self, key):
         old_value = self.get(key)
         delete_idx = self._index[key]
-
-        # Move bottom value to cur delete position
         bottom_value, bottom_key = self._heap[-1]
-        self._index[bottom_key] = delete_idx
-
-        # Soft delete the actual id & sentimental bottom node
+        
         self._heap.pop()
         self._index.pop(key)
-
-        # Bubble bottom down
-        if delete_idx!=len(self._heap):
-            self._heapfix(bottom_key, bottom_value)
+        
+        if delete_idx != len(self._heap):
+            self._heap[delete_idx] = (bottom_value, bottom_key)
+            self._index[bottom_key] = delete_idx
+            # Try both directions
+            self._indexed_siftdown(0, delete_idx)
+            self._indexed_siftup(delete_idx)
         return old_value
 
 
@@ -194,7 +193,7 @@ class index_pq:
     def __repr__(self):
         return f"<{self.__class__.__name__} with {len(self)} elements>"
 
-class maxindex_pq:
+class index_pq_max:
     def __init__(self, lst=None):
         self._reset()
         if lst is not None:
@@ -311,20 +310,17 @@ class maxindex_pq:
     def _heapremove_max(self, key):
         old_value = self.get(key)
         delete_idx = self._index[key]
-
-        # Move bottom value to cur delete position
         bottom_value, bottom_key = self._heap[-1]
-        self._index[bottom_key] = delete_idx
-
-        # Soft delete the actual id & sentimental bottom node
+        
         self._heap.pop()
         self._index.pop(key)
-
-        # Bubble bottom down
-        if delete_idx!=len(self._heap):
-            self._heapfix_max(bottom_key, bottom_value)
+        
+        if delete_idx != len(self._heap):
+            self._heap[delete_idx] = (bottom_value, bottom_key)
+            self._index[bottom_key] = delete_idx
+            self._indexed_siftdown_max(0, delete_idx)
+            self._indexed_siftup_max(delete_idx)
         return old_value
-
 
     def _indexed_siftdown_max(self, startpos, pos):
 
