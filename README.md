@@ -87,9 +87,9 @@ After working through the theory and rigorously testing the heap functions, it w
 
 **Create Object**
 ```python3
-from index_heapq import index_pq, maxindex_pq
+from index_heapq import index_pq, index_pq_max
 index_pq()
-maxindex_pq()
+index_pq_max()
 
 
 # They can taken a list during construction:
@@ -215,12 +215,12 @@ def dijkstra(graph, start=0):
 <br/>
 This library also exposes a max-heap variant of the class
 
-Class **`maxindex_pq()`**
+Class **`index_pq_max()`**
 ```python3
-from index_heapq import maxindex_pq
+from index_heapq import index_pq_max
 
 # 1. Initialization 
-pq = maxindex_pq([10, 20, 30])  
+pq = index_pq_max([10, 20, 30])  
 
 
 
